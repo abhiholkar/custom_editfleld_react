@@ -67,6 +67,7 @@ const Password = ({ maxLength }) => {
     console.log("Keycode = " + event.keyCode);
     if (event.keyCode === 13 || (passwordLength <= event.target.textContent.length)) {
       event.preventDefault();
+      return;
     }
 
     //Handle backspace key
@@ -74,7 +75,7 @@ const Password = ({ maxLength }) => {
       // TODO
     }
 
-    //handle alphanumeric keys
+    //handle alphanumeric keys only
     if ((event.keyCode < 47) || (event.keycode > 90)) {
       event.preventDefault();
     } else {
