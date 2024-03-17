@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+import React, { createContext, useState } from 'react';
 import './App.css';
+import Username from './components/Username';
+import Password from './components/Password';
+import Submit from './components/Submit';
 
-function App() {
+export const UserNameContext = createContext(null);
+export const PasswordContext = createContext(null);
+
+const App = () => {
+
+  const [currentUser, setCurrentUser] = useState('');
+  const [userpassword, setUserPassword] = useState('');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserNameContext.Provider
+      value={{
+        currentUser,
+        setCurrentUser
+      }}>
+      <PasswordContext.Provider
+        value={{
+          userpassword,
+          setUserPassword
+        }}>
+
+        <div className="background-image">
+          <h1>User Login</h1>
+          <div className="App">
+            <Username maxLength={8} />
+            <Password maxLength={8} />
+            <div className="submit" >
+              <Submit />
+            </div>
+          </div>
+        </div>
+      </PasswordContext.Provider>
+    </UserNameContext.Provider >
   );
-}
+};
 
 export default App;
